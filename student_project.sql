@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS jc_student_child;
 DROP TABLE IF EXISTS jc_student_order;
 DROP TABLE IF EXISTS jc_passport_office;
 DROP TABLE IF EXISTS jc_register_office;
-DROP TABLE IF EXISTS jc_country_struc;
+DROP TABLE IF EXISTS jc_country_struct;
 DROP TABLE IF EXISTS jc_street;
 
 
@@ -15,7 +15,7 @@ CREATE TABLE jc_street
     PRIMARY KEY(street_code)
 );
 
-CREATE TABLE jc_country_struc
+CREATE TABLE jc_country_struct
 (
     area_id char(12) unique not null,
     area_name varchar(200),
@@ -28,7 +28,7 @@ CREATE TABLE jc_passport_office
     p_office_area_id char(12) not null,
     p_office_name varchar(200),
     PRIMARY KEY(p_office_id),
-    FOREIGN KEY (p_office_area_id) REFERENCES jc_country_struc(area_id) ON DELETE RESTRICT
+    FOREIGN KEY (p_office_area_id) REFERENCES jc_country_struct(area_id) ON DELETE RESTRICT
 );
 
 CREATE TABLE jc_register_office
@@ -37,7 +37,7 @@ CREATE TABLE jc_register_office
     r_office_area_id char(12) not null,
     r_office_name varchar(200),
     PRIMARY KEY(r_office_id),
-    FOREIGN KEY (r_office_area_id) REFERENCES jc_country_struc(area_id) ON DELETE RESTRICT
+    FOREIGN KEY (r_office_area_id) REFERENCES jc_country_struct(area_id) ON DELETE RESTRICT
 );
 
 CREATE TABLE jc_student_order
@@ -94,7 +94,7 @@ CREATE TABLE jc_student_child
     FOREIGN KEY (c_street_code) REFERENCES jc_street(street_code)  ON DELETE RESTRICT,
     FOREIGN KEY (c_register_office_id) REFERENCES jc_register_office(r_office_id) ON DELETE RESTRICT
 );
-
+/*
 INSERT INTO jc_street (street_code, street_name) VALUES (2,'Street First'),
                                                         (3,'Street First'),
                                                         (4,'Street First');
@@ -102,4 +102,5 @@ INSERT INTO jc_street (street_code, street_name) VALUES (2,'Street First'),
 UPDATE jc_street SET street_name = 'Super'
 WHERE street_code = 2;
 
---DELETE FROM jc_street WHERE street_code = 3;
+DELETE FROM jc_street WHERE street_code = 3;
+*/
