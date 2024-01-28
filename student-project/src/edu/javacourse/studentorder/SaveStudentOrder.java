@@ -54,7 +54,7 @@ public class SaveStudentOrder
         StudentOrderDao dao = new StudentOrderDaoImpl();
         Long id = dao.saveStudentOrder(s);
         System.out.println(id);
-        System.out.println("Голова");
+        System.out.println("Completed");
 //        StudentOrder so = new StudentOrder();
 //        long ans = saveStudentOrder(so);
 //        System.out.println(ans);
@@ -80,7 +80,7 @@ public class SaveStudentOrder
         Address address = new Address("195000", street, "12", "", "142");
 
         // Муж
-        Adult husband = new Adult("Петров", "Виктор", "Сергеевич", LocalDate.of(1997, 8, 24));
+        Adult husband = new Adult("Bob", "Morley", "Shumacher", LocalDate.of(1997, 8, 24));
         husband.setPassportSeria("" + (1000 + id));
         husband.setPassportNumber("" + (100000 + id));
         husband.setIssueDate(LocalDate.of(2017, 9, 15));
@@ -88,8 +88,10 @@ public class SaveStudentOrder
         husband.setIssueDepartment(passportOffice1);
         husband.setStudentId("" + (100000 + id));
         husband.setAddress(address);
+        husband.setUniversity(new University(1L,""));
+        husband.setStudentId("HH1324");
         // Жена
-        Adult wife = new Adult("Петрова", "Вероника", "Алекссевна", LocalDate.of(1998, 3, 12));
+        Adult wife = new Adult("Anna", "Elisabet", "Taylor", LocalDate.of(1998, 3, 12));
         wife.setPassportSeria("" + (2000 + id));
         wife.setPassportNumber("" + (200000 + id));
         wife.setIssueDate(LocalDate.of(2018, 4, 5));
@@ -97,15 +99,17 @@ public class SaveStudentOrder
         wife.setIssueDepartment(passportOffice2);
         wife.setStudentId("" + (200000 + id));
         wife.setAddress(address);
+        wife.setUniversity(new University(1L,""));
+        wife.setStudentId("JJ1345");
         // Ребенок
-        Child child1 = new Child("Петрова", "Ирина", "Викторовна", LocalDate.of(2018, 6, 29));
+        Child child1 = new Child("Mikey", "Honeyken", "Junior", LocalDate.of(2018, 6, 29));
         child1.setCertificateNumber("" + (300000 + id));
-        child1.setIssueDate(LocalDate.of(2018, 7, 19));
+        child1.setIssueDate(LocalDate.of(2018, 6, 11));
         RegisterOffice registerOffice2 = new RegisterOffice(2L,"","");
         child1.setIssueDepartment(registerOffice2);
         child1.setAddress(address);
         // Ребенок
-        Child child2 = new Child("Петров", "Евгений", "Викторович", LocalDate.of(2018, 6, 29));
+        Child child2 = new Child("Maya", "Summer", "Junior", LocalDate.of(2018, 6, 29));
         child2.setCertificateNumber("" + (400000 + id));
         child2.setIssueDate(LocalDate.of(2018, 7, 19));
         RegisterOffice registerOffice3 = new RegisterOffice(3L,"","");
