@@ -182,5 +182,39 @@ VALUES (1, '010010000000', 'ЗАГС 1 района 1 города'),
        (6, '020020010000', 'ЗАГС Область 2 район 1'),
        (7, '020020020000', 'ЗАГС Область 2 район 2');
 
-INSERT INTO public.jc_student_order(student_order_status, student_order_date, h_sur_name, h_given_name, h_patronymic, h_date_of_birth, h_passport_seria, h_passport_number, h_passport_date, h_passport_office_id, h_post_index, h_street_code, h_building, h_extension, h_apartment,h_university_id,h_student_number, w_sur_name, w_given_name, w_patronymic, w_date_of_birth, w_passport_seria, w_passport_number, w_passport_date, w_passport_office_id, w_post_index, w_street_code, w_building, w_extension, w_apartment,w_university_id,w_student_number, certificate_id, register_office_id, marriage_date)	VALUES (0, '2024-01-28 12:09:38.952505+04', 'Bob', 'Morley', 'Shumacher', '1997-08-24 +04', '1010', '100010', '2017-09-15 +04', 1, '195000', 1, '12', '', '142', 1, 'HH1324', 'Anna', 'Elisabet', 'Taylor', '1998-03-12 +04', '2010', '200010', '2018-04-05 +04', 1, '195000', 1, '12', '', '142', 1, 'JJ1345', '123456010', 1, '2016-07-04 +03')
-RETURNING "student_order_id"
+--SELECT * FROM jc_student_order WHERE student_order_status = 1 ORDER BY student_order_date
+
+SELECT so.*, ro.r_office_area_id, ro.r_office_name FROM jc_student_order so
+JOIN jc_register_office ro ON so.register_office_id = ro.r_office_id
+WHERE student_order_status = 0
+ORDER BY student_order_date;
+
+SELECT so.*, ro.r_office_area_id, ro.r_office_name,
+po_h.p_office_id as h_p_office_area_id, po_h.p_office_name as h_p_office_name,
+po_w.p_office_id as w_p_office_area_id, po_w.p_office_name as w_p_office_name
+FROM jc_student_order so
+JOIN jc_register_office ro ON so.register_office_id = ro.r_office_id
+JOIN jc_passport_office po_h ON po_h.p_office_id = so.h_passport_office_id
+JOIN jc_passport_office po_w ON po_w.p_office_id = so.h_passport_office_id
+WHERE student_order_status = 0
+ORDER BY student_order_date;
+
+SELECT soc.*, ro.r_office_id,ro.r_office_name
+FROM jc_student_child soc
+JOIN jc_register_office ro ON ro.r_office_id = soc.c_register_office_id
+WHERE student_order_id IN (7,2,3)
+
+ORDER BY student_order_id;
+
+SELECT so.*, ro.r_office_area_id, ro.r_office_name,
+        po_h.p_office_id as h_p_office_area_id, po_h.p_office_name as h_p_office_name,
+            po_w.p_office_id as w_p_office_area_id, po_w.p_office_name as w_p_office_name,
+            soc.*, ro_c.r_office_id, ro_c.r_office_name
+            FROM jc_student_order so
+            JOIN jc_register_office ro ON so.register_office_id = ro.r_office_id
+            JOIN jc_passport_office po_h ON po_h.p_office_id = so.h_passport_office_id
+            JOIN jc_passport_office po_w ON po_w.p_office_id = so.h_passport_office_id
+            JOIN jc_student_child soc ON soc.student_order_id = so.student_order_id
+            JOIN jc_register_office ro_c ON ro_c.r_office_id = soc.c_register_office_id
+            WHERE student_order_status = 0
+            ORDER BY student_order_date;
