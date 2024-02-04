@@ -218,3 +218,5 @@ SELECT so.*, ro.r_office_area_id, ro.r_office_name,
             JOIN jc_register_office ro_c ON ro_c.r_office_id = soc.c_register_office_id
             WHERE student_order_status = 0
             ORDER BY student_order_date;
+
+CREATE INDEX idx_student_order_status ON jc_student_order (student_order_status);

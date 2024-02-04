@@ -14,8 +14,7 @@ import edu.javacourse.studentorder.validator.WeddingValidator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class StudentOrderValidator
-{
+public class StudentOrderValidator {
     private CityRegisterValidator cityRegisterVal;
     private WeddingValidator weddingVal;
     private ChildrenValidator childrenVal;
@@ -38,7 +37,7 @@ public class StudentOrderValidator
     public void checkAll() {
         List<StudentOrder> soList = readStudentOrders();
 
-        for(StudentOrder so : soList) {
+        for (StudentOrder so : soList) {
             checkOneOrder(so);
         }
     }
